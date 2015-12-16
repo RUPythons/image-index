@@ -10,10 +10,10 @@ import imagehash
 import argparse
 import shelve
 
+
 def ham_dist(str1, str2):
     assert len(str1) == len(str2)
     return sum(ch1 != ch2 for ch1, ch2 in zip(str1, str2))
-
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--dataset", required = True,
@@ -23,6 +23,7 @@ ap.add_argument("-s", "--shelve", required = True,
 ap.add_argument("-q", "--query", required = True,
     help = "path to the query image")
 args = vars(ap.parse_args())
+print(type(args["shelve"]))
 
 # open the shelve database
 db = shelve.open(args["shelve"])
@@ -45,6 +46,6 @@ print ("Found %d images" % (len(filenames)))
 for filename in filenames:
     image = Image.open(args["dataset"] + "/" + str(filename))
     image.show()
-
+    
 # close the shelve database
 db.close()
